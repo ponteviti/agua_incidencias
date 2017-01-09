@@ -45,7 +45,7 @@
         <div id="info" class="container">
             <h3>Descripcion</h3>
             <div id="theNumberofSpots"></div>
-            <p>Informacion provenientes de la siguiente <a href="https://docs.google.com/spreadsheets/d/1XHpZBtHUEc2m0cnxEHsoy8vPO5gPKL4bLixWVnH7x2k/pubhtml" target="_blank">hoja de Google Drive</a>.</p>
+            <p>Informacion provenientes de la siguiente <a href="https://docs.google.com/spreadsheets/d/18o2-c9sWq_MBN4MYrvI1GUnGds1miuvyloJ3H9qexHE/pubhtml" target="_blank">hoja de Google Drive</a>.</p>
 
             <h3>Info</h3>
             <p>When I'm visiting a new city I'd like to know which coffee shops have the best vibes, great coffee and are good for hunkering down and having a good hack. Yelp will tell you where the Starbucks is and Foursquare will tell you where your friend's have <em>been</em> - but did they like it and was it a grab in go place or a hack place? Plus, what about the people I don't follow on Foursquare or who can't check-in when in other countries?</p>
@@ -72,15 +72,15 @@
         </tr>
             {{#rows}}
                 <tr id="{{rowNumber}}" class="spotRow">
-                <td>{{CODIGO}}</td>
-                <td>{{Descripcion de la incidencia}}</td>
-                <td>{{Localizacion}}</td>
-                <td>{{Nombre y Apellidos}}</td>
-                <td>{{Estado de la incidencia}}</td>
-                <td><td>{{Fecha de notificacion}}</td>
-                <td>{{Fecha de la comunicación}}</td>
-                <td>{{Fecha de resolución}}</td>
-                <td><a class="button" href="https://maps.google.com/maps?q={{Localizacion}}" target="_blank">G Map</a> </td>
+                <td>{{codigo}}</td>
+                <td>{{descripcion}}</td>
+                <td>{{localizacion}}</td>
+                <td>{{nombreyapellidos}}</td>
+                <td>{{estado}}</td>
+                <td><td>{{fechanotificacion}}</td>
+                <td>{{fechacomunicacion}}</td>
+                <td>{{fecha}}</td>
+                <td><a class="button" href="https://maps.google.com/maps?q={{localizacion}}" target="_blank">G Map</a> </td>
         </tr>
             {{/rows}}
         </table>
@@ -89,19 +89,19 @@
     <script id="latestSpot" type="text/html">
         {{#rows}}
             <h4 class="fauxButton">DATOS DE LA INCIDENCIA</h4>
-            <h2>{{Localizacion}}</h2>
-            <p class="colorText">{{Descripcion de la incidencia}}<p>
+            <h2>{{localizacion}}</h2>
+            <p class="colorText">{{descripcion}}<p>
         <!--   <p class="colorText">{{city}}{{#state}}, {{state}}{{/state}}{{#postcode}}, {{postcode}}{{/postcode}}</p>-->
             <ul>
-                <li><span class="category">Fecha comunicacion: </span> {{Fecha de la comunicación}}</li>
-                <li><span class="category">Solicitante:</span> {{Nombre y Apellidos}}</li>
-                <li><span class="category">Fecha resolucion: </span> {{Fecha de resolución}}</li>
-                <li><span class="category">Estado actual:</span> {{Estado de la incidencia}}</li>
-                <li><span class="category">Observaciones:</span> {{Observaciones}}</li>
+                <li><span class="category">Fecha comunicacion: </span> {{fechacomunicación}}</li>
+                <li><span class="category">Solicitante:</span> {{nombreyapellidos}}</li>
+                <li><span class="category">Fecha resolucion: </span> {{fecharesolución}}</li>
+                <li><span class="category">Estado actual:</span> {{estado}}</li>
+                <li><span class="category">Observaciones:</span> {{observaciones}}</li>
               <!--  <li><span class="category">Contributed By:</span> <a href="http://www.twitter.com/{{contributerstwitter}}" target="_blank">@{{contributerstwitter}}</a></li>-->
             </ul>
             <ul>
-                <li><a href="https://maps.google.com/maps?q={{Localizacion}}" target="_blank">Ver en Google Maps</a></li>
+                <li><a href="https://maps.google.com/maps?q={{localizacion}}" target="_blank">Ver en Google Maps</a></li>
                 <!--
                 <li><a href="https://maps.google.com/maps?q={{name}},{{city}},{{state}}" target="_blank">View in Google Maps</a></li>
                 <li><a href="http://www.yelp.com/search?find_desc={{name}}&find_loc={{city}},{{state}}" target="_blank">Find on Yelp</a></li>
@@ -117,15 +117,15 @@
     <script id="selectedSpot" type="text/html">
         {{#rows}}
             <h4 class="fauxButton">DATOS DE LA INCIDENCIA</h4>
-            <h2>{{Localizacion}}</h2>
-            <p class="colorText">{{Descripcion de la incidencia}}<p>
+            <h2>{{localizacion}}</h2>
+            <p class="colorText">{{descripcion}}<p>
             <!--<p class="colorText">{{city}}{{#state}}, {{state}}{{/state}}{{#postcode}}, {{postcode}}{{/postcode}}</p>-->
         <ul>
-                <li><span class="category">Fecha comunicacion: </span> {{Fecha de la comunicación}}</li>
-                <li><span class="category">Solicitante:</span> {{Nombre y Apellidos}}</li>
-                <li><span class="category">Fecha resolucion: </span> {{Fecha de resolución}}</li>
-                <li><span class="category">Estado actual:</span> {{Estado de la incidencia}}</li>
-                <li><span class="category">Observaciones:</span> {{Observaciones}}</li>
+                <li><span class="category">Fecha comunicacion: </span> {{fechacomunicación}}</li>
+                <li><span class="category">Solicitante:</span> {{nombreyapellidos}}</li>
+                <li><span class="category">Fecha resolucion: </span> {{fecharesolución}}</li>
+                <li><span class="category">Estado actual:</span> {{estado}}</li>
+                <li><span class="category">Observaciones:</span> {{observaciones}}</li>
               <!--  <li><span class="category">Contributed By:</span> <a href="http://www.twitter.com/{{contributerstwitter}}" target="_blank">@{{contributerstwitter}}</a></li>-->
             </ul>
             <ul>
@@ -141,7 +141,7 @@
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function() {
             var gData
-            var URL = "https://docs.google.com/spreadsheets/d/1XHpZBtHUEc2m0cnxEHsoy8vPO5gPKL4bLixWVnH7x2k/pubhtml"
+            var URL = "https://docs.google.com/spreadsheets/d/18o2-c9sWq_MBN4MYrvI1GUnGds1miuvyloJ3H9qexHE/pubhtml"
                 Tabletop.init({ key: URL, callback: showInfo, simpleSheet: true })
         })
         // so long, so messy
@@ -156,12 +156,12 @@
             Sheetsee.initiateTableFilter(tableOptions)
             // create geoJSON with coordinates and other
             // useful bits from the original data
-            var optionsJSON = ["CODIGO", "Localizacion", "Nombre y Apellidos", "Descripcion de la incidencia", , "Estado de la incidencia"]
+            var optionsJSON = ["codigo", "localizacion", "nombreyapellidos", "descripcion", "estado"]
             var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
             // create map, tilelayer (map background), markers and popups
             var map = Sheetsee.loadMap("map")
             Sheetsee.addTileLayer(map, 'jllord.n7aml2bc')
-            var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, "<h2>{{ Descripcion de la incidencia }}</h2>", true)
+            var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, "<h2>{{ descripcion }}</h2>", true)
             // find the latest spot with the most important
             // info filled in (to prevent map breaking if
             // someone is currently editing spreadsheet)
@@ -195,7 +195,7 @@
                 var latestCompleteSpot = []
                 var startWithLatestRow = data.reverse()
                 startWithLatestRow.forEach(function(row){
-                    if (!row.lat || !row.long || !row.CODIGO || !row.Localizacion ) return
+                    if (!row.lat || !row.long || !row.codigo || !row.localizacion || !row.estado || !row.descripcion ) return
                     else latestCompleteSpot.push(row)
                 })
                 return latestCompleteSpot[0]
