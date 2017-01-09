@@ -37,7 +37,7 @@
             <div id="map"></div>
         </div>
         <div class="container">
-            <input id="tableFilter" type="text" placeholder="filtrar por.."></input>
+            <input id="tableFilter" type="text" placeholder="Filtrar por"></input>
             <span class="clear button">Borrar</span> <span class="resetMap button">Limpiar Mapa</span>
             <span class="noMatches">Sin resultados</span>
             <div id="hackSpotsTable"></div>
@@ -68,7 +68,9 @@
             <th class="tHeader">Fecha notificacion</th>
             <th class="tHeader">Fecha comunicacion</th>
             <th class="tHeader">Fecha resolucion</th>
-            <th class="tHeader">Elsewhere</th>
+           <!--
+           <th class="tHeader">Elsewhere</th>
+           -->
         </tr>
             {{#rows}}
                 <tr id="{{rowNumber}}" class="spotRow">
@@ -80,7 +82,9 @@
                 <td><td>{{fechanotificacion}}</td>
                 <td>{{fechacomunicacion}}</td>
                 <td>{{fecharesolucion}}</td>
-                <td><a class="button" href="https://maps.google.com/maps?q={{localizacion}}" target="_blank">G Map</a> </td>
+           <!-- 
+           <td><a class="button" href="https://maps.google.com/maps?q={{localizacion}}" target="_blank">G Map</a> </td>
+           -->
         </tr>
             {{/rows}}
         </table>
