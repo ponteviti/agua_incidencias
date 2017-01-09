@@ -194,7 +194,7 @@
                 $('#latestSpot').css("display", "none")
                 $('#selectedSpot').html(selectedSpot).css("display", "inline")
                 var selectedCoords = [dataElement[0].lat, dataElement[0].long]
-                map.setView(selectedCoords, 16)
+                map.setView(selectedCoords, 15)
             })
             // so that the first map and info that loads
             // is complete and doesn't show rows that are
@@ -233,7 +233,7 @@
                 $('.spotRow').removeClass("selectedRow")
                 $('#latestSpot').css("display", "inline")
                 $('#selectedSpot').css("display", "none")
-                map.setView([0,0], 1)
+                map.setView([42.362147, -8.705459], 10)
             })
             // find total number of spots added
             var theNumberofSpots = Sheetsee.ich.theNumberofSpots({
