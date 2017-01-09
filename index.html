@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Hack Spots</title>
+        <title>Abastecimiento - Control incidencias. Concello de Marin</title>
         <meta charset='utf-8'>
         <script type="text/javascript" src='js/jquery.js '></script>
         <script type="text/javascript" src='js/tabletop1.3.4.js'></script>
@@ -38,8 +38,8 @@
         </div>
         <div class="container">
             <input id="tableFilter" type="text" placeholder="filter by.."></input>
-            <span class="clear button">Clear</span> <span class="resetMap button">Reset Map</span>
-            <span class="noMatches">no matches</span>
+            <span class="clear button">Borrar</span> <span class="resetMap button">Limpiar Mapa</span>
+            <span class="noMatches">Sin resultados</span>
             <div id="hackSpotsTable"></div>
         </div>
         <div id="info" class="container">
@@ -88,7 +88,7 @@
 
     <script id="latestSpot" type="text/html">
         {{#rows}}
-            <h4 class="fauxButton">INCIDENCIA</h4>
+            <h4 class="fauxButton">DATOS DE LA INCIDENCIA</h4>
             <h2>{{Localizacion}}</h2>
             <p class="colorText">{{Descripcion de la incidencia}}<p>
         <!--   <p class="colorText">{{city}}{{#state}}, {{state}}{{/state}}{{#postcode}}, {{postcode}}{{/postcode}}</p>-->
@@ -104,34 +104,36 @@
                 <li><a href="https://maps.google.com/maps?q={{Localizacion}}" target="_blank">Ver en Google Maps</a></li>
                 <!--
                 <li><a href="https://maps.google.com/maps?q={{name}},{{city}},{{state}}" target="_blank">View in Google Maps</a></li>
-                <li><a href="http://www.yelp.com/search?find_desc={{name}}&find_loc={{city}},{{state}}" target="_blank">Find on Yelp</a></li>-->
+                <li><a href="http://www.yelp.com/search?find_desc={{name}}&find_loc={{city}},{{state}}" target="_blank">Find on Yelp</a></li>
+                -->
             </ul>
         {{/rows}}
     </script>
 
     <script id="theNumberofSpots" type="text/html">
-        <p>N&uacute;mero de solicitudes<strong><span class="red-text">{{numberOfSpots}}</span></p>
+        <p>N&uacute;mero de incidencias<strong><span class="red-text">{{numberOfSpots}}</span></p>
     </script>
 
     <script id="selectedSpot" type="text/html">
         {{#rows}}
-            <h4 class="fauxButton">EXPEDIENTE SELECIONADO</h4>
-            <h2>{{codexpte}}</h2>
-            <p class="colorText">{{situacion}}<p>
+            <h4 class="fauxButton">DATOS DE LA INCIDENCIA</h4>
+            <h2>{{Localizacion}}</h2>
+            <p class="colorText">{{Descripcion de la incidencia}}<p>
             <!--<p class="colorText">{{city}}{{#state}}, {{state}}{{/state}}{{#postcode}}, {{postcode}}{{/postcode}}</p>-->
-            <ul>
-              <li><span class="category">Año:</span> {{año}}</li>
-              <li><span class="category">Solicitante:</span> {{solicitante}}</li>
-              <li><span class="category">Situacion:</span> {{situacion}}</li>
-              <li><span class="category">Tramita:</span> {{admnivo}}</li>
-              <li><span class="category">Fecha solicitud:</span> {{fechasolicitud}}</li>
-              <li><span class="category">Estado actual:</span> {{estado}}</li>
+        <ul>
+                <li><span class="category">Fecha comunicacion: </span> {{Fecha de la comunicación}}</li>
+                <li><span class="category">Solicitante:</span> {{Nombre y Apellidos}}</li>
+                <li><span class="category">Fecha resolucion: </span> {{Fecha de resolución}}</li>
+                <li><span class="category">Estado actual:</span> {{Estado de la incidencia}}</li>
+                <li><span class="category">Observaciones:</span> {{Observaciones}}</li>
+              <!--  <li><span class="category">Contributed By:</span> <a href="http://www.twitter.com/{{contributerstwitter}}" target="_blank">@{{contributerstwitter}}</a></li>-->
             </ul>
             <ul>
-              <li><a href="https://maps.google.com/maps?q={{situacion}}" target="_blank">Ver en Google Maps</a></li>
-              <!--
-              <li><a href="https://maps.google.com/maps?q={{name}},{{city}},{{state}}" target="_blank">View in Google Maps</a></li>
-              <li><a href="http://www.yelp.com/search?find_desc={{name}}&find_loc={{city}},{{state}}" target="_blank">Find on Yelp</a></li>-->
+                <li><a href="https://maps.google.com/maps?q={{Localizacion}}" target="_blank">Ver en Google Maps</a></li>
+                <!--
+                <li><a href="https://maps.google.com/maps?q={{name}},{{city}},{{state}}" target="_blank">View in Google Maps</a></li>
+                <li><a href="http://www.yelp.com/search?find_desc={{name}}&find_loc={{city}},{{state}}" target="_blank">Find on Yelp</a></li>
+                -->
             </ul>
         {{/rows}}
     </script>
@@ -154,12 +156,12 @@
             Sheetsee.initiateTableFilter(tableOptions)
             // create geoJSON with coordinates and other
             // useful bits from the original data
-            var optionsJSON = ["codexpte", "situacion", "solicitante", "rowNumber"]
+            var optionsJSON = ["CODIGO", "Localizacion", "Nombre y Apellidos", "Descripcion de la incidencia", , "Estado de la incidencia"]
             var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
             // create map, tilelayer (map background), markers and popups
             var map = Sheetsee.loadMap("map")
             Sheetsee.addTileLayer(map, 'jllord.n7aml2bc')
-            var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, "<h2>{{ codexpte }}</h2>", true)
+            var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, "<h2>{{ Descripcion de la incidencia }}</h2>", true)
             // find the latest spot with the most important
             // info filled in (to prevent map breaking if
             // someone is currently editing spreadsheet)
@@ -193,7 +195,7 @@
                 var latestCompleteSpot = []
                 var startWithLatestRow = data.reverse()
                 startWithLatestRow.forEach(function(row){
-                    if (!row.lat || !row.long || !row.codexpte || !row.situacion || !row.solicitante || !row.estado ) return
+                    if (!row.lat || !row.long || !row.CODIGO || !row.Localizacion ) return
                     else latestCompleteSpot.push(row)
                 })
                 return latestCompleteSpot[0]
