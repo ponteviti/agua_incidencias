@@ -164,7 +164,7 @@
             Sheetsee.initiateTableFilter(tableOptions)
             // create geoJSON with coordinates and other
             // useful bits from the original data
-            var optionsJSON = ["codigo", "localizacion", "nombreyapellidos", "descripcion", "estado"]
+            var optionsJSON = ["codigo", "localizacion", "nombreyapellidos", "descripcion", "estado", "rowNumber"]
             var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
             // create map, tilelayer (map background), markers and popups
             var map = Sheetsee.loadMap("map")
